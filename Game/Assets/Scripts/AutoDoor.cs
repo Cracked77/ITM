@@ -20,7 +20,7 @@ public class AutoDoor : MonoBehaviour
     {
         if (PlayerIsHere)
         {
-            if (movingDoor.transform.position.x < maximumClosing)
+            if (movingDoor.transform.position.x < maximumOpening)
             {
                 movingDoor.transform.Translate(1f * Time.deltaTime, 0f, 0f);
             }
