@@ -34,4 +34,14 @@ public class playermoves : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Door")
+        {
+            if(other.GetComponent<WorkingDoor>().Moving == false)
+            {
+                other.GetComponent<WorkingDoor>().Moving = true;
+            }
+        }
+    }
 }
