@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.8640724, g: 0.8513321, b: 0.8434465, a: 1}
+  m_IndirectSpecularColor: {r: 0.864073, g: 0.85133314, b: 0.8434469, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1948,7 +1948,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FPS: {fileID: 385056305}
-  RunRange: 4
+  RunRange: 10
+  speed: 2
 --- !u!195 &1224398755
 NavMeshAgent:
   m_ObjectHideFlags: 0
