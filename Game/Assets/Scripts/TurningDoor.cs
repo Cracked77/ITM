@@ -33,7 +33,12 @@ public class TurningDoor : MonoBehaviour
             {
                 StopCoroutine(AnimationCoroutine);
             }
-                  
+            if (IsRotatingDoor)
+            {
+                float dot = Vector3.Dot(Forward, (UserPosition - transform.position).normalized);
+                Debug.Log($"Dot: {dot.ToString("N3")}");
+                AnimationCoroutine = StartCoroutine(DoRotationOpen(dot));
+            }      
         }
     }
     // Start is called before the first frame update
@@ -47,4 +52,57 @@ public class TurningDoor : MonoBehaviour
     {
         
     }
+    private IEnumerator DoRotationOpen(float ForwardAmount)
+    {
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation;
+
+        if (ForwardAmount >= ForwardDirection)
+        {
+            endRotation = Quaternion.Euler(new Vector3(0, StartRotation.y - RotationAmount, 0));
+        }
+        else
+        {
+            endRotation = Quaternion.Euler(new Vector3(0, StartRotation.y + RotationAmount, 0));
+        }
+        IsOpen = true;
+        float time = 0;
+        while(time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+            yield return null;
+            time += Time.deltaTime * Speed;
+        }
+    }
+    public void Close()
+    {
+        if (IsOpen)
+        {
+            if(AnimationCoroutine != null)
+            {
+                StopCoroutine(AnimationCoroutine);
+
+            }
+            if (IsRotatingDoor)
+            {
+                AnimationCoroutine = StartCoroutine(DoRotationClose());
+
+            }
+        }
+    }
+    private IEnumerator DoRotationClose()
+    {
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(StartRotation);
+
+        IsOpen = false;
+        float time = 0;
+        while (time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+            yield return null;
+            time += Time.deltaTime * Speed;
+        }
+    }
+
 }
