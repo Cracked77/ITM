@@ -27,3 +27,6 @@ public class mouselook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 }
+
+
+
