@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playermoves : MonoBehaviour
 {
@@ -12,10 +13,20 @@ public class playermoves : MonoBehaviour
     public float GroundDistance = 0.4f;
     public LayerMask Groundmask;
     bool isgrounded;
+
+    private int count;
+    public Text countertext;
+
+    void setcountertext()
+    {
+        countertext.text = count.ToString() + "/4";
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        count = 0;
+        setcountertext();
     }
 
     // Update is called once per frame
@@ -43,5 +54,18 @@ public class playermoves : MonoBehaviour
                 other.GetComponent<WorkingDoor>().Moving = true;
             }
         }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            other.gameObject.SetActive(false);
+            count = count + 1;
+            setcountertext();
+
+
+        }
+       
+
     }
 }
