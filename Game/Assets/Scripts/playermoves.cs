@@ -16,10 +16,15 @@ public class playermoves : MonoBehaviour
 
     private int count;
     public Text countertext;
+    public Text wintext;
 
     void setcountertext()
     {
         countertext.text = count.ToString() + "/4";
+        if (count >= 4)
+        {
+            wintext.text = "Guess you win this time"; 
+        }
     }
 
     // Start is called before the first frame update
@@ -27,6 +32,7 @@ public class playermoves : MonoBehaviour
     {
         count = 0;
         setcountertext();
+        wintext.text = "";
     }
 
     // Update is called once per frame
